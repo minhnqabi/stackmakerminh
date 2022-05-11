@@ -111,7 +111,7 @@ public class PlayerManage : MonoBehaviour
             {
                 if(!other.GetComponent<EarnStack>().earned)
                 {
-                other.GetComponent<EarnStack>().earned=true;
+                other.GetComponent<EarnStack>().Earn();
                 this.EarnStack();
                 }
                 return;
@@ -122,7 +122,7 @@ public class PlayerManage : MonoBehaviour
                 if(!other.GetComponent<FillStack>().filled)
                 {
                 Debug.LogError("fill");
-                other.GetComponent<FillStack>().filled=true;
+                other.GetComponent<FillStack>().Fill();
                 this.FillStack();
                 }
             }
