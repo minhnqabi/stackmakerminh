@@ -31,7 +31,7 @@ public class MySwipe : LeanSwipeBase
             {
                 if (/*swipeVector.x < 0 && */swipeVector.y > 0)
                 {
-                    Debug.LogError("swipe up");
+                   // Debug.LogError("swipe up");
                     InputInfo inputInfo = new InputInfo();
                     inputInfo.inputType = InputID.SWIPE_UP;
                     player.PlayerMoveControl(InputID.SWIPE_UP);
@@ -41,7 +41,7 @@ public class MySwipe : LeanSwipeBase
                 }
                 if (/*swipeVector.x > 0 &&*/ swipeVector.y < 0)
                 {
-                    Debug.LogError("swipe down");
+                   // Debug.LogError("swipe down");
                     InputInfo inputInfo = new InputInfo();
                     inputInfo.inputType = InputID.SWIPE_DOWN;
                     player.PlayerMoveControl(InputID.SWIPE_DOWN);
@@ -52,7 +52,7 @@ public class MySwipe : LeanSwipeBase
             {
                 if (swipeVector.x < 0 /*&& swipeVector.y < 0*/)
                 {
-                    Debug.LogError("swipe left");
+                   // Debug.LogError("swipe left");
                     InputInfo inputInfo = new InputInfo();
                     inputInfo.inputType = InputID.SWIPE_LEFT;
                     player.PlayerMoveControl(InputID.SWIPE_LEFT);
@@ -60,7 +60,7 @@ public class MySwipe : LeanSwipeBase
                 }
                 if (swipeVector.x > 0/* && swipeVector.y > 0*/)
                 {
-                    Debug.LogError("swipe right");
+                   // Debug.LogError("swipe right");
                     InputInfo inputInfo = new InputInfo();
                     inputInfo.inputType = InputID.SWIPE_RIGHT;
                     player.PlayerMoveControl(InputID.SWIPE_RIGHT);

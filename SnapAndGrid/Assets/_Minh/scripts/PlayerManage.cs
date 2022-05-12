@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManage : MonoBehaviour
+public class PlayerManage : SingletonMonoBehaviour<PlayerManage>
 {
     public Transform triggerMoveContain;
     public GameObject Up,Down,Left,Right;
@@ -16,16 +16,19 @@ public class PlayerManage : MonoBehaviour
     public float highStack;
     int _layerMask=1<<8;
     public int stackCount;
+    Vector3 renderOriginPost;
     void Start()
     {
         Gizmos.color=Color.blue;
         _layerMask=~_layerMask;
         stackCount=1;
-        
+        renderOriginPost=renderPlayer.transform.position;
+        //this.PlayerWin();
     }
     bool canMove=false;
     bool isMoving=false;
     Vector3 target;
+    bool canJump=true;
 
     // Update is called once per frame
     void Update()
@@ -44,12 +47,18 @@ public class PlayerManage : MonoBehaviour
                
                   canMove=true;
                    target=hit.transform.position;
+                   canJump=true;
                
            }
            else
            {
                //canMove=false;
                isMoving=false;
+               if(canJump)
+               {
+                   animatorPlayer.Play("Jump");
+                   canJump=false;
+               }
            }
         }
     }
@@ -121,26 +130,37 @@ public class PlayerManage : MonoBehaviour
 
                 if(!other.GetComponent<FillStack>().filled)
                 {
-                Debug.LogError("fill");
+               // Debug.LogError("fill");
                 other.GetComponent<FillStack>().Fill();
                 this.FillStack();
                 }
             }
+        }
+        if(other.name.Contains("WinTrigger"))
+        {
+            this.PlayerWin();
         }
 
     }
     public void EarnStack()
     {   
         renderPlayer.transform.position=Vector3.Lerp(renderPlayer.position,renderPlayer.position+Vector3.up*highStack,0.5f);
-        animatorPlayer.Play("Jump");
+       // animatorPlayer.Play("Jump");
         this.stackCount++;
 
     }
     public void FillStack()
     {
         renderPlayer.transform.position=Vector3.Lerp(renderPlayer.position,renderPlayer.position+Vector3.down*highStack,0.5f);
-        animatorPlayer.Play("Jump");
+        //animatorPlayer.Play("Jump");
         this.stackCount--;
+    }
+    public void PlayerWin()
+    {
+        animatorPlayer.Play("Dance");
+        animatorPlayer.transform.rotation=Quaternion.Euler(180,-180,-180);
+        renderPlayer.position=new Vector3(renderPlayer.position.x,this.renderOriginPost.y,renderPlayer.position.z);
+
     }
 
 }
