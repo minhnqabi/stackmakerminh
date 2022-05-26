@@ -164,5 +164,23 @@ public void GenMap2()
         }
 }
 
+[Button]
+public void ResetMap()
+{
+
+ while(lvContain.childCount>0)
+    {
+        DestroyImmediate(lvContain.GetChild(0).gameObject);
+    }
+   for(int i=0;i<25;i++)
+        {
+            for(int j=0;j<25;j++)
+            {
+                customCellDraw[i,j]=0;
+            }
+        }
+
+}
+       
 
 }

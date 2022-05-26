@@ -21,6 +21,9 @@ public class MySwipe : LeanSwipeBase
     private void OnEnable() {
         LeanTouch.OnFingerSwipe+=HandleFingerSwipe;
     }
+    private void OnDestroy() {
+        LeanTouch.OnFingerSwipe-=HandleFingerSwipe;
+    }
     private void HandleFingerSwipe(LeanFinger finger)
         {
            
@@ -89,5 +92,19 @@ public enum InputID
     {
         public InputID inputType;
     }
+    public static class MConfig{
 
+        public static string ANIM_JUMP="Jump";
+        public static string ANIM_DANCE="Dance";
+        public static string NAME_WALL="dimian2";
+        public static string TAG_WALL="Wall";
+        public static string TAG_BLOCK="Block";
+        public static string KEY_LV="currentLv";
+        public static string TAG_Wintrigger="WinTrigger";
+        public static void UpdateLevelUp()
+        {
+            PlayerPrefs.SetInt(KEY_LV,(PlayerPrefs.GetInt(KEY_LV,0)+1));
+        }
+    }
+   
 

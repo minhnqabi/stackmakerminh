@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Block
+  - WinTrigger
+  - Wall
   layers:
   - Default
   - TransparentFX

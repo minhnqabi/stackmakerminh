@@ -5,12 +5,16 @@ using UnityEngine;
 public class FillStack : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool filled=false;
+    bool filled=false;
     public GameObject renderFill;
     public void Fill()
     {
         this.filled=true;
         renderFill.SetActive(false);
 
+    }
+    public bool IsFilled()
+    {
+        return filled;
     }
 }
