@@ -3,7 +3,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 
 
-public class ChangeScene : Editor {
+public class ChangeScene : Editor
+{
 
     [MenuItem("Open Scene/Editor LV")]
     public static void OpenEditor()
@@ -17,12 +18,14 @@ public class ChangeScene : Editor {
         OpenScene("Game");
     }
 
-    
 
-    private static void OpenScene (string sceneName) {
-		if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo ()) {
-			EditorSceneManager.OpenScene ("Assets/Scenes/" + sceneName + ".unity");
-		}
-	}
+
+    private static void OpenScene(string sceneName)
+    {
+        if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/" + sceneName + ".unity");
+        }
+    }
 }
 #endif

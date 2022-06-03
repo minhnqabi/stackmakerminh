@@ -25,7 +25,6 @@ public class PlayerManage : SingletonMonoBehaviour<PlayerManage>
         stackCount = 1;
         renderOriginPost = renderPlayer.transform.position;
         trans = transform;
-        //this.PlayerWin();
     }
     bool canMove = false;
     bool isMoving = false;
@@ -73,22 +72,16 @@ public class PlayerManage : SingletonMonoBehaviour<PlayerManage>
             switch (_input)
             {
                 case InputID.SWIPE_UP:
-
                     direct = Vector3.forward;
-                    //this.Up.SetActive(true); Move by trigger
-
                     break;
                 case InputID.SWIPE_DOWN:
                     direct = Vector3.back;
-                    //this.Down.SetActive(true);
                     break;
                 case InputID.SWIPE_LEFT:
                     direct = Vector3.left;
-                   // this.Left.SetActive(true);
                     break;
                 case InputID.SWIPE_RIGHT:
                     direct = Vector3.right;
-                    //this.Right.SetActive(true);
                     break;
 
             }
@@ -106,26 +99,13 @@ public class PlayerManage : SingletonMonoBehaviour<PlayerManage>
     }
     private void OnTriggerEnter(Collider other)
     {
-        //Move by trigger
-        // if(other.CompareTag("Block"))
-        // {
-        //     if(other.GetComponent<BlockManage>().canMove)
-        //     {
-        //        transform.position=Vector3.Lerp(transform.position,other.transform.position,1.0f);
-        //     }
-        //     else
-        //     {
-        //         this.ResetPlayerDetechMove();
 
-        //     }
-
-        // }
         if (other.CompareTag(MConfig.TAG_BLOCK))
         {
-            
+
             if (other.GetComponent<EarnStack>())
             {
-                EarnStack objEarnStack=other.GetComponent<EarnStack>();
+                EarnStack objEarnStack = other.GetComponent<EarnStack>();
                 if (!objEarnStack.IsEarned())
                 {
                     objEarnStack.Earn();
@@ -135,11 +115,10 @@ public class PlayerManage : SingletonMonoBehaviour<PlayerManage>
             }
             if (other.GetComponent<FillStack>())
             {
-                FillStack objFillStack=other.GetComponent<FillStack>();
+                FillStack objFillStack = other.GetComponent<FillStack>();
 
                 if (!objFillStack.IsFilled())
                 {
-                    // Debug.LogError("fill");
                     objFillStack.Fill();
                     this.FillStack();
                 }
@@ -153,16 +132,14 @@ public class PlayerManage : SingletonMonoBehaviour<PlayerManage>
     }
     public void EarnStack()
     {
-        //Debug.LogError("earn");
+
         renderPlayer.transform.position = Vector3.Lerp(renderPlayer.position, renderPlayer.position + Vector3.up * highStack, 0.5f);
-        // animatorPlayer.Play("Jump");
         this.stackCount++;
 
     }
     public void FillStack()
     {
         renderPlayer.transform.position = Vector3.Lerp(renderPlayer.position, renderPlayer.position + Vector3.down * highStack, 0.5f);
-        //animatorPlayer.Play("Jump");
         this.stackCount--;
     }
     public void PlayerWin()

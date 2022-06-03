@@ -10,101 +10,90 @@ public class MySwipe : LeanSwipeBase
     public PlayerManage player;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    private void OnEnable() {
-        LeanTouch.OnFingerSwipe+=HandleFingerSwipe;
+    private void OnEnable()
+    {
+        LeanTouch.OnFingerSwipe += HandleFingerSwipe;
     }
-    private void OnDestroy() {
-        LeanTouch.OnFingerSwipe-=HandleFingerSwipe;
+    private void OnDestroy()
+    {
+        LeanTouch.OnFingerSwipe -= HandleFingerSwipe;
     }
     private void HandleFingerSwipe(LeanFinger finger)
+    {
+
+
+        HandleFingerSwipe(finger, finger.StartScreenPosition, finger.ScreenPosition);
+        Vector2 swipeVector = finger.SwipeScaledDelta;
+        if (Mathf.Abs(swipeVector.y) > Mathf.Abs(swipeVector.x))
         {
-           
-
-            HandleFingerSwipe(finger, finger.StartScreenPosition, finger.ScreenPosition);
-            Vector2 swipeVector = finger.SwipeScaledDelta;
-            if (Mathf.Abs(swipeVector.y) > Mathf.Abs(swipeVector.x))
+            if (/*swipeVector.x < 0 && */swipeVector.y > 0)
             {
-                if (/*swipeVector.x < 0 && */swipeVector.y > 0)
-                {
-                   // Debug.LogError("swipe up");
-                    InputInfo inputInfo = new InputInfo();
-                    inputInfo.inputType = InputID.SWIPE_UP;
-                    player.PlayerMoveControl(InputID.SWIPE_UP);
+                // Debug.LogError("swipe up");
+                InputInfo inputInfo = new InputInfo();
+                inputInfo.inputType = InputID.SWIPE_UP;
+                player.PlayerMoveControl(InputID.SWIPE_UP);
 
-                  
 
-                }
-                if (/*swipeVector.x > 0 &&*/ swipeVector.y < 0)
-                {
-                   // Debug.LogError("swipe down");
-                    InputInfo inputInfo = new InputInfo();
-                    inputInfo.inputType = InputID.SWIPE_DOWN;
-                    player.PlayerMoveControl(InputID.SWIPE_DOWN);
-                  
-                }
+
             }
-            else
+            if (/*swipeVector.x > 0 &&*/ swipeVector.y < 0)
             {
-                if (swipeVector.x < 0 /*&& swipeVector.y < 0*/)
-                {
-                   // Debug.LogError("swipe left");
-                    InputInfo inputInfo = new InputInfo();
-                    inputInfo.inputType = InputID.SWIPE_LEFT;
-                    player.PlayerMoveControl(InputID.SWIPE_LEFT);
-                    
-                }
-                if (swipeVector.x > 0/* && swipeVector.y > 0*/)
-                {
-                   // Debug.LogError("swipe right");
-                    InputInfo inputInfo = new InputInfo();
-                    inputInfo.inputType = InputID.SWIPE_RIGHT;
-                    player.PlayerMoveControl(InputID.SWIPE_RIGHT);
-                   
-                }
-            }
+                // Debug.LogError("swipe down");
+                InputInfo inputInfo = new InputInfo();
+                inputInfo.inputType = InputID.SWIPE_DOWN;
+                player.PlayerMoveControl(InputID.SWIPE_DOWN);
 
+            }
         }
+        else
+        {
+            if (swipeVector.x < 0 /*&& swipeVector.y < 0*/)
+            {
+                // Debug.LogError("swipe left");
+                InputInfo inputInfo = new InputInfo();
+                inputInfo.inputType = InputID.SWIPE_LEFT;
+                player.PlayerMoveControl(InputID.SWIPE_LEFT);
+
+            }
+            if (swipeVector.x > 0/* && swipeVector.y > 0*/)
+            {
+                // Debug.LogError("swipe right");
+                InputInfo inputInfo = new InputInfo();
+                inputInfo.inputType = InputID.SWIPE_RIGHT;
+                player.PlayerMoveControl(InputID.SWIPE_RIGHT);
+
+            }
+        }
+
+    }
 
 }
 public enum InputID
-    {
-        NONE,
-        SWIPE_LEFT,
-        SWIPE_RIGHT,
-        SWIPE_UP,
-        SWIPE_DOWN,
-        DRAW_L,
-        DRAW_U,
-        DRAW_V1,//v nguoc
-        TWO_LEFT, //two fing tap on left screen
-        TWO_RIGHT, //two fing tap on right screen
-        HOLD    
-    }
-     public struct InputInfo
-    {
-        public InputID inputType;
-    }
-    public static class MConfig{
+{
+    NONE,
+    SWIPE_LEFT,
+    SWIPE_RIGHT,
+    SWIPE_UP,
+    SWIPE_DOWN,
+    DRAW_L,
+    DRAW_U,
+    DRAW_V1,//v nguoc
+    TWO_LEFT, //two fing tap on left screen
+    TWO_RIGHT, //two fing tap on right screen
+    HOLD
+}
+public struct InputInfo
+{
+    public InputID inputType;
+}
 
-        public static string ANIM_JUMP="Jump";
-        public static string ANIM_DANCE="Dance";
-        public static string NAME_WALL="dimian2";
-        public static string TAG_WALL="Wall";
-        public static string TAG_BLOCK="Block";
-        public static string KEY_LV="currentLv";
-        public static string TAG_Wintrigger="WinTrigger";
-        public static void UpdateLevelUp()
-        {
-            PlayerPrefs.SetInt(KEY_LV,(PlayerPrefs.GetInt(KEY_LV,0)+1));
-        }
-    }
-   
+
 
