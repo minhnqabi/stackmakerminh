@@ -23,28 +23,11 @@ public class GenMap : SerializedMonoBehaviour
         map = new int[row, colum];
         Debug.Log(map.Length);
         customCellDraw = new int[25, 25];
-        // for(int i=0;i<row;i++)
-        // {
-        //     for(int j=0;j<colum;j++)
-        //     {
-        //        GameObject objwall= Instantiate(wall,new Vector3(i*pice,0,j*pice),wall.transform.rotation);
-        //        objwall.transform.parent=lvContain;
-        //     }
-        // }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
-    // [TableMatrix(HorizontalTitle = "Read Only Matrix", IsReadOnly = true)]
-    // public int[,] ReadOnlyMatrix = new int[5, 5];
 
-    // [TableMatrix(HorizontalTitle = "X axis", VerticalTitle = "Y axis")]
-    // public InfoMessageType[,] LabledMatrix = new InfoMessageType[6, 6];
 
-    //[Button]
+
     public void GenMapPrefab()
     {
 
@@ -87,13 +70,7 @@ public class GenMap : SerializedMonoBehaviour
     public int[,] customCellDraw = new int[25, 25];
     private int DrawCell(Rect rect, int value = -1)
     {
-        // for(int a=0;a<25;a++)
-        // {
-        //     for(int b=0;b<25;b++)
-        //     {
-        //         Debug.Log(customCellDraw[a,b].ToString());
-        //     }
-        // }
+
         if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
         {
             value++;
@@ -185,14 +162,7 @@ public class GenMap : SerializedMonoBehaviour
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
-        // if (lvContain)
-        // {
-        //     while (lvContain.childCount > 0)
-        //     {
-        //         DestroyImmediate(lvContain.GetChild(0).gameObject);
-        //     }
-        // }
-        
+
         for (int i = 0; i < 25; i++)
         {
             for (int j = 0; j < 25; j++)
@@ -210,32 +180,6 @@ public class GenMap : SerializedMonoBehaviour
         int[,] loadedData = MConfig.ArrayFromString(dataContain.mapData);
         customCellDraw = loadedData;
         this.GenMap2();
-
-        //    for (int i = 0; i < 25; i++)
-        //     {
-        //         for (int j = 0; j < 25; j++)
-        //         {
-        //             if (loadedData[i, j] == 1)
-        //             {
-        //                 GameObject objwall = Instantiate(wall, new Vector3(j * pice, 0, i * pice), wall.transform.rotation);
-        //                 objwall.transform.parent = loadDataContain;
-
-        //             }
-        //             if (loadedData[i, j] == 2)
-        //             {
-        //                 GameObject objwall = Instantiate(earnStack, new Vector3(j * pice, 0, i * pice), wall.transform.rotation);
-        //                 objwall.transform.parent = loadDataContain;
-
-        //             }
-        //             if (loadedData[i, j] == 3)
-        //             {
-        //                 GameObject objwall = Instantiate(fillStack, new Vector3(j * pice, 0, i * pice), wall.transform.rotation);
-        //                 objwall.transform.parent = loadDataContain;
-
-        //             }
-
-        //         }
-        //     }
 
     }
 
